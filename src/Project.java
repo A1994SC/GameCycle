@@ -26,6 +26,9 @@ public class Project {
                 System.out.print(relation[0] + "," + relation[1] + " ");
                 g.add(relation[CHILD], relation[PARENT]);
             }
+//            for (int j = 0; j < grph[EDGE]; j++) {
+            System.out.print(g.hasCycles() + " ");
+//            }
             System.out.println();
             System.out.println(g.status());
         }
@@ -33,17 +36,16 @@ public class Project {
 
     public static class Graph {
         private final int[][] graph;
-        private int edges = 0;
+        private final int size;
 
         public Graph(int size) {
+            this.size = size;
             graph = new int[size + 1][size + 1];
         }
 
         public void add(int x, int y) {
-            if (x < graph.length && y < graph.length) {
+            if (x < graph.length && y < graph.length)
                 graph[x][y] = MARK;
-                edges++;
-            }
         }
 
         public void print() {
@@ -54,9 +56,37 @@ public class Project {
             }
         }
 
+        private final int MAX = Integer.MAX_VALUE;
+        private final int MIN = Integer.MIN_VALUE;
+        private final int maxI = 1;
+        private final int minI = 0;
+
         public boolean hasCycles() {
-//            for ()
-            return false;
+            int[][] dist = new int[2][size + 1];
+            for (int i = 0; i < size; i++)
+                dist[maxI][i] = MAX;
+            for (int i = 0; i < size; i++)
+                dist[minI][i] = MIN;
+
+            for (int k = 1; k <= size; k++)
+                for (int i = 1; i <= size; i++)
+                    for (int j = 1; j <= size; j++) {
+                        if (graph[i][j] != MAX && dist[minI][j] > (dist[minI][i] + graph[i][j]))
+                            dist[minI][i] = (dist[minI][i] + graph[i][j]);
+                        if (graph[i][j] != MIN && dist[maxI][j] < (dist[maxI][i] + graph[i][j]))
+                            dist[maxI][i] = (dist[maxI][i] + graph[i][j]);
+                    }
+
+            boolean flag = false;
+            for (int i = 1; i <= size; i++)
+                for (int j = 1; j <= size; j++) {
+                    if (graph[i][j] != MAX && dist[minI][j] > (dist[minI][i] + graph[i][j]))
+                        flag = true;
+                    if (graph[i][j] != MIN && dist[maxI][j] < (dist[maxI][i] + graph[i][j]))
+                        flag = true;
+                }
+
+            return flag;
         }
 
         public String status() {
