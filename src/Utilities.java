@@ -3,6 +3,13 @@ import java.util.ArrayList;
 
 public class Utilities {
 
+    public static int[] toIntArray(String[] ary) {
+        int[] t = new int[ary.length];
+        for (int i = 0; i < ary.length; i++)
+            t[i] = Integer.parseInt(ary[i]);
+        return t;
+    }
+
     private static String writerName = "Output.txt";
     private static PrintWriter writer = null;
 
