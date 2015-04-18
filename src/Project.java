@@ -56,11 +56,22 @@ public class Project {
             return count;
         }
 
+        private final boolean MARKED = true;
+
         public boolean isCycle() {
-            for (int i = 0; i < graph.length; i++)
-                for (int j = 0; j < graph.length; j++)
-                    if (graph[i][j] == MARK && graph[j][i] == MARK)
+            boolean[][] visited = new boolean[graph.length][graph.length];
+            for (int i = 0; i < graph.length; i++) {
+                for (int j = 0; j < graph.length; j++) {
+                    if (graph[i][j] == MARK && !visited[i][j]) {
+                        visited[i][j] = MARKED;
+                        i = j;
+                        j = 0;
+                        break;
+                    } else if (visited[i][j]) {
                         return true;
+                    }
+                }
+            }
             return false;
         }
 
