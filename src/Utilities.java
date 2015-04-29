@@ -33,14 +33,9 @@ public class Utilities {
             writer.close();
     }
 
-    private static String readerName = "TestCase.txt";
     private static BufferedReader reader = null;
 
-    public static void readSetName(String name) {
-        readerName = name;
-    }
-
-    public static ArrayList<String> readFromFile() {
+    public static ArrayList<String> readFromFile(String readerName) {
         if (reader == null)
             try {
                 reader = new BufferedReader(new FileReader(readerName));
@@ -60,6 +55,8 @@ public class Utilities {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+
+        readClose();
 
         return list;
     }

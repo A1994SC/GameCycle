@@ -1,0 +1,28 @@
+21
+A B C D E F G H I J K L M N O P Q R S T U 
+23
+A B 1 a
+A G 1 b
+B C 1 a
+C H 1 b
+D L 1 a
+E H 1 b
+F G 1 a
+F K 1 b
+G M 1 a
+I N 1 b
+I O 1 a
+J K 1 b
+K L 1 a
+L O 1 b
+L P 1 a
+M P 1 b
+N S 1 a
+O Q 1 b
+O U 1 a
+O P 1 b
+P T 1 a
+Q R 1 b
+S T 1 a
+1
+A J
